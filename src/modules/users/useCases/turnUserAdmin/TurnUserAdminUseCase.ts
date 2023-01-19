@@ -1,3 +1,4 @@
+import { ErrorHandler } from "../../../../helpers/ErrorHandler";
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -9,7 +10,10 @@ class TurnUserAdminUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    const user = this.usersRepository.findById(user_id);
+
+    if (!user) throw new ErrorHandler("User not found", 404);
+    return this.usersRepository.turnAdmin(user);
   }
 }
 
