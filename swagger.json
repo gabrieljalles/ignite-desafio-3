@@ -1,0 +1,213 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "titles": "Ignite challange Documentation",
+        "description":"This is an API about creating, listing and changing the status of the users",
+        "version": "1.0.0",
+        "contact": {
+            "email":"gabriel.jalleswork@hotmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post":{
+                "tags": ["User"],
+                "summary": "Create a new user",
+                "description": "Create a new user using email and name",
+                "requestBody": { 
+                    "content":{
+                        "application/json":{
+                            "shcema":{
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name":"gabriel",
+                                    "email":"gabriel@hotmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Created"
+                    },
+                    "500":{
+                        "description": "Internal server error"
+                    },
+                    "400":{
+                        "description": "email already exists"
+                    }
+                }
+            },
+            "get":{
+                "tags": ["User"],
+                "summary": "List all users",
+                "description": "List all users",
+                "responses":{
+                    "200": {
+                        "description":"Success",
+                        "content": { 
+                            "application/json":{
+                                "schema": {
+                                    "type":"array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "descripton": "User does not exists",
+                        "content": { 
+                            "application/json":{
+                                "schema": {
+                                    "type":"array",
+                                    "items": {
+                                        "type": "object",
+                                        "roperties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "/users/:user_id":{
+            "get":{
+                "tags": ["User"],
+                "summary": "list profile user",
+                "responses": {
+                    "201":{
+                        "description": "Success",
+                        "content": {
+                            "application/json":{
+                                "shcema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "User does  not exists",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+        },
+        "/users/:user_id/admin":{
+            "patch":{
+                "tags":["User"],
+                "summary": "Turn user admin",
+                "responses": {
+                    "201":{
+                        "description": "Success",
+                        "content": {
+                            "application/json":{
+                                "shcema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "User does  not exists",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+}
